@@ -28,6 +28,7 @@ public class CustomFileUtils {
     // UUID 랜덤 파일
     public String makeRandomFileName() {
         return UUID.randomUUID().toString();        // UUID 랜덤 쓰는 이유 -> 중복을 피하려고
+                                                    // 파일명 + 확장자가 겹치면 컴퓨터가 덮어써서
     }
 
     // 파일명에서 확장자 추출
