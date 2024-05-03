@@ -55,14 +55,11 @@ public class UserService {
             throw new RuntimeException("아이디를 확인해 주세요");
         } else if (!BCrypt.checkpw(p.getUpw(), user.getUpw())) {
             throw new RuntimeException("비밀번호를 확인해 주세요");
-        } else {
-            System.out.println("로그인 성공");
         }
-
-
-
-
-
-
+        return SignInRes.builder()
+                .userId(user.getUserId())
+                .nm(user.getNm())
+                .pic(user.getPic())
+                .build();
     }
 }

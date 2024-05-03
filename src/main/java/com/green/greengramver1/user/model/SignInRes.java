@@ -1,9 +1,12 @@
 package com.green.greengramver1.user.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter                 // Setter 뺀 이유 : 빌더로 데이터를 넣으니깐
+@Builder
+@NoArgsConstructor  // 기본생성자를 자동으로 만들어주는 Lombok의 기능
+@AllArgsConstructor
 public class SignInRes {
     @Schema(description = "유저PK")
     private long userId;
