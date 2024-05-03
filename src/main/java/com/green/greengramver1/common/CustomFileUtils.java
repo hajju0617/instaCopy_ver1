@@ -3,6 +3,7 @@ package com.green.greengramver1.common;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.UUID;
@@ -45,5 +46,17 @@ public class CustomFileUtils {
     public String makeRandomFileName(String fileName) {     //fileName에 원본 파일명이 들어옴
         // 랜덤 파일명.확장자 return
         return makeRandomFileName() + getExt(fileName);
+    }
+
+    // 랜덤 파일명 with 확장자 만들기 using MultipartFile
+    public String makeRandomFileName(MultipartFile mf) {
+        return mf == null ? null : makeRandomFileName(mf.getOriginalFilename());
+    }
+
+    // 파일 저장 (target : 경로/파일명)
+    public void transferTo(MultipartFile mf, String target) throws Exception {
+        File savefile = new File(uploadPath, target); // 최종 경로
+
+        mf.transferTo(savefile);
     }
 }
