@@ -18,5 +18,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) { // 외부파일과 연결
         registry.addResourceHandler("/pic/**").addResourceLocations("file:" + uploadPath);
+        // /pic/ 뒤에 어떤 내용이 온다면 addResourceLocations("file:" + uploadPath) 를 붙여줌
     }
 }

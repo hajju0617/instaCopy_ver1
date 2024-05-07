@@ -13,4 +13,15 @@ public class FeedPicPostDto {
 
     @Builder.Default
     private List<String> fileNames = new ArrayList<>();
+    // "a.jpg", "b.jpg", "c.jpg"....
 }
+
+/*
+INSERT INTO feed_pics
+        ( feed_id , pic)        <!-- 여러개를 넣어야 해서 SET 안 씀 -->
+        VALUES
+        ( 10, 'a.jpg' )
+        , ( 10, 'b.jpg')
+        , ( 10, 'c.jpg')
+        다음에 올 값이 있다면 , 를 찍음
+ */

@@ -11,7 +11,8 @@ import java.util.UUID;
 @Component      // 빈등록
 @Getter
 public class CustomFileUtils {
-    @Value("${file.directory}")   // 설정파일(yaml)에 file -> directory: 에 지정 되어있는 경로를 uploadPath에 주입
+    @Value("${file.directory}")
+    // 설정파일(yaml)에 file -> directory: 에 지정 되어있는 경로를 uploadPath에 주입
     private final String uploadPath;
     public CustomFileUtils(@Value("${file.directory}") String uploadPath) {
         // @Value("${file.directory}") ----> 객체 생성때 new CustomFileUtils("@Value("${file.directory}")")
@@ -52,11 +53,13 @@ public class CustomFileUtils {
     // 랜덤 파일명 with 확장자 만들기 using MultipartFile
     public String makeRandomFileName(MultipartFile mf) {
         return mf == null ? null : makeRandomFileName(mf.getOriginalFilename());
+        //makeRandomFileName(mf.getOriginalFilename()) --> 호출 public String makeRandomFileName(String fileName)
     }
 
     // 파일 저장 (target : 경로/파일명)
     public void transferTo(MultipartFile mf, String target) throws Exception {
         File savefile = new File(uploadPath, target); // 최종 경로
+        // uploadPath = 파일이 저장되는 절대 경로
 
         mf.transferTo(savefile);
     }

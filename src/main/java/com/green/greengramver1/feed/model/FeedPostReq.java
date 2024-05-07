@@ -14,4 +14,5 @@ public class FeedPostReq {
     private String contents;
     private String location;
 
+//    mybatis 에 보내주는 값 : userId, contests, location / 리턴값으로 pk값 받아옴
 }

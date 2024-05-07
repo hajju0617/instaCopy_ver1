@@ -7,9 +7,13 @@
     <insert id="postFeed"
             useGeneratedKeys="true"
             keyProperty="feedId">
+        <!-- (mysql) maria db에서만 쓸 수 있는 기능 -->
+        <!-- INSERT 때 pk값을 받아오는 방법 -->
+        <!-- 레코드 삽입시 auto increment 가 적용돼서 1증가 한 pk값을 확인 -->
+        <!-- mybatis 에 보내주는 값 : userId, contests, location / 리턴값으로 pk값 받아옴 -->
         INSERT INTO feed
         SET writer_id = #{userId}
-        , contents = #{contests}
+        , contents = #{contents}
         , location = #{location}
     </insert>
 
@@ -21,4 +25,21 @@
             ( #{feedId}, #{item} )
         </foreach>
     </insert>
+
+    <select id="getFeed">
+        SELECT A.feed_id AS feedId, A.contents, A.location, A.created_at AS createdAt
+             , B.user_id AS writerId, B.nm AS writerNm, B.pic AS writerPic
+         FROM feed A
+         JOIN user B
+           ON A.writer_id = B.user_id
+        ORDER BY A.feed_id DESC
+        LIMIT #{startIdx}, #{len};
+    </select>
+
+    <select id="getFeedPicsByFeedId">
+        SELECT pic
+        FROM feed_pics
+        WHERE feed_id = #{feedId}
+    </select>
 </mapper>
+
