@@ -50,8 +50,8 @@ public class FeedService {
              */
 
             for(MultipartFile pic : pics) {     // 랜덤한 파일명.확장자 만들어주고 + 이동시킴
-                String saveFileName = customFileUtils.makeRandomFileName(pic);
-                picDto.getFileNames().add(saveFileName);
+                String saveFileName = customFileUtils.makeRandomFileName(pic);      //업로드된 파일(pic)에 대해 랜덤한 파일명을 생성 (파일 충돌 방지)
+                picDto.getFileNames().add(saveFileName);                            //생성된 파일명을 picDto의 파일명 목록에 추가
                 String target = String.format("%s/%s", path, saveFileName);
                 customFileUtils.transferTo(pic, target);
             }
@@ -68,6 +68,11 @@ public class FeedService {
         // 피드를 올리자마자 삭제한다거나 댓글을 쓴다거나 할때 pk값이 필요하므로 pk값을 반환 (프론트에서 필요해서)
     }   //@Transactional 범위 끝
 
+
+    /*
+    N + 1에서, 1은 한 엔티티를 조회하기 위한 쿼리의 개수이며
+    N은 조회된 엔티티의 개수만큼 연관된 데이터를 조회하기 위한 추가적인 쿼리의 개수를 의미
+     */
     public List<FeedGetRes> getFeed(FeedGetReq p) {         // n + 1 발생
         List<FeedGetRes> list = mapper.getFeed(p);    // 이 부분이 1을 뜻함
 
