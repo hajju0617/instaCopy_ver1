@@ -22,8 +22,8 @@ public class UserController {
 
     @PostMapping("sign-up")         // /api/user/sign-up 붙여서 사용
     @Operation(summary = "회원가입", description = "프로필 사진은 필수가 아님")
-    public ResultDto<Integer> postUser(@RequestPart(required = false) MultipartFile pic
-            , @RequestPart SignUpPostReq p) {
+    public ResultDto<Integer> postUser(@RequestPart(required = false) MultipartFile pic     // (required = false) : 필수값이 아니라는 뜻, 디폴트값은 true
+            , @RequestPart SignUpPostReq p) {                                    // pic 단어랑 postman key값 일치해야 사진 등록 됨.
         log.info("pic : {}", pic);      // pic 문자열 변환 값이 {} 안에 삽입
         log.info("p: {}", p);
         int result = service.postSignUp(pic, p);
